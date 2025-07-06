@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotes App</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        body {
+            font-family: "Outfit", sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+        }
+        #quote-con {
+            margin-top: 20px;
+        }
+        .quote {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .form-container{
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid black;
+            padding: 20px 20px;
+            width: max-content;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .form-inputs{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        border: 1px solid #ccc ;
+        padding: 10px 20px;
+        border-radius: 20px;
+        border-top: 2px solid #ccc ;
+
+        }
+        .form-inputs input{
+           
+            border: none;
+             border-top: 2px solid #ccc ;
+             border-radius: 10px;
+            padding: 10px 10px;
+        }
+        ::placeholder{
+            text-align: center;
+            font-size: 'outfit';
+        }
+      .btn{
+        padding: 10px 10px;
+        font-size: large;
+        color: white;
+        background-color: rgb(3, 21, 58) ;
+        border-radius: 10px;
+        border: none;
+      }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Getting All Quotes</h1>
+        <div id="quote-con">
+
+        </div>
+
+        <div class="form-container">
+            <h2>Enter New Quote</h2>
+            <div class="form-inputs">
+                <input type="text" placeholder="Enter Author Name" id="author-name">
+                <input type="text" placeholder="Enter Quote" id="quote-content">
+            </div>
+            <button onclick="addQuote()" class="btn">Add quote</button>
+            <p style="margin: 5px; text-align: center;" id="mess"></p>
+        </div>
+    </div>
+
+    <!-- Include Axios via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const API_URL = 'http://localhost:3000/api';
+
+        // Function to display a single quote
+       
+
+        // Get first quote
+        const container=document.getElementById('quote-con')
+        async function getData() {
+            try {
+                const response = await axios.get(`${API_URL}/quotes`);
+                
+                const data=response.data
+               const quotes=data.map((quote1)=>
+                `
+                <div class="quote">
+                    <strong>${quote1.author}</strong>
+                    <p>${quote1.quote}</p>
+                    </div>
+                `
+            ).join('')
+            container.innerHTML=quotes
+            } catch (error) {
+                console.log(object)('error ocured')
+            }
+        }
+
+        // Automatically fetch first quote on page load
+        getData();
+        const author=document.getElementById('author-name').value
+        const quote=document.getElementById('quote-content').value
+        const message=document.getElementById('mess')
+        async function addQuote(){
+            
+        const author = document.getElementById('author-name').value;
+const quote = document.getElementById('quote-content').value;
+         try {
+             const response=await axios.post(`${API_URL}/addquote`,{
+                author:author,
+                quote:quote
+             })
+             message.innerHTML="Inserted"
+         } catch (error) {
+            message.innerHTML=error
+         }
+        
+
+        }
+    </script>
+</body>
+</html>
