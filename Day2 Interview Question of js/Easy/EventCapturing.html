@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #top{
+        height: auto;
+        width: auto;
+        padding: 20px 20px;
+        color: aquamarine;
+    }
+    #middiv{
+        height: auto ;
+        width: auto;
+        padding: 20px 20px;
+        color: aqua;
+    }
+    #innerdiv{
+        height: auto ;
+        width: auto;
+        padding: 20px 20px;
+        color: rgb(21, 164, 164);
+    }
+</style>
+<body>
+    <div id="top"> Outter
+        <div id="middiv">Mid
+            <div id="innerdiv">Inner
+
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('top').addEventListener("click",()=>{
+            console.log("outter has clicked")
+        })
+         document.getElementById('top').addEventListener("click",()=>{
+            console.log("Mid has clicked")
+        })
+         document.getElementById('top').addEventListener("click",()=>{
+            console.log("Innermost has clicked")
+        })
+    </script>
+</body>
+</html>
