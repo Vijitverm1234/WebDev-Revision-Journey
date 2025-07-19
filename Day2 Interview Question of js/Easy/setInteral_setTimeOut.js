@@ -13,3 +13,11 @@ setTimeout(()=>{
     console.log("hello after 2 second")
 },2000);
 clearInterval(timeId)
+
+const timei=setInterval(() => {
+    console.log("hello")
+}, 2000);
+
+setTimeout(()=>{
+    clearInterval(timei)
+},4500)
